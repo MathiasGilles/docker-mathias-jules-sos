@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "test": "jest",
-    "jsdoc": "jsdoc -c jsdoc.conf.json"
+    "jsdoc": "jsdoc -c ./jsdoc.conf.json"
   },
   "dependencies": {
     "next": "12.2.3",
