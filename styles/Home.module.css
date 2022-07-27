@@ -8,8 +8,6 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
 .footer {
@@ -28,7 +26,7 @@
   flex-grow: 1;
 }
 
-.title a {
+.title span {
   color: #0070f3;
   text-decoration: none;
 }
@@ -63,6 +61,11 @@
   font-size: 1.1rem;
   font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
     Bitstream Vera Sans Mono, Courier New, monospace;
+}
+
+.form {
+  font-size: 1.4rem;
+  margin: 2rem 2rem;
 }
 
 .grid {
