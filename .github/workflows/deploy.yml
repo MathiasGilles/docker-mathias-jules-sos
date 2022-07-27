@@ -1,4 +1,4 @@
-name: deploy nexturl to vercel
+name: deploy main to vercel
 
 on:
   push:

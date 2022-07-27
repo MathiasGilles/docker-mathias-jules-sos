@@ -1,6 +1,5 @@
 const handleForm = require('./handleForm.js')
 
-
 describe("HandlePassword", () => {
     describe('Does not work', () => {
         it('Should return false if password is invalid', () => {
