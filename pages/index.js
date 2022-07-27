@@ -16,18 +16,29 @@ export default function Home() {
 
     const [fillForm, setFillForm] = useState(false)
     const [validatedForm, setValidatedForm] = useState(false)
+    const [validatedInputs, setValidatedInputs] = useState(true)
+    const [validatedFormContent, setValidatedFormContent] = useState("")
 
     function submitForm(e) {
         e.preventDefault()
-        console.log(form)
-        if(form.prenom === null || form.nom === null || form.email === null || form.password === null) {
+        if (form.prenom === null || form.nom === null || form.email === null || form.password === null) {
             setFillForm(true)
         }
-        if(handleForm.handleEmail(form.email)){
-            if(handleForm.handlePassword(form.password)){
+        if (handleForm.handleEmail(form.email)) {
+            if (handleForm.handlePassword(form.password)) {
                 setFillForm(false)
                 setValidatedForm(true)
+                setValidatedInputs(true)
             }
+            else {
+                setFillForm(false)
+                setValidatedFormContent("Votre mot de passe n'est pas valide")
+                setValidatedInputs(false)
+            }
+        } else {
+            setFillForm(false)
+            setValidatedInputs(false)
+            setValidatedFormContent("Votre email n'est pas valide")
         }
     }
 
@@ -70,6 +81,7 @@ export default function Home() {
                         <button onClick={submitForm}>Soumettre le formulaire</button>
                         {fillForm && <div>Remplis le formulaire complètement stp</div>}
                         {validatedForm && <div>Votre formulaire est validé !</div>}
+                        {!validatedInputs && <div>{validatedFormContent}</div>}
                     </form>
                 </div>
             </main>
