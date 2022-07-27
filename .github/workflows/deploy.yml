@@ -14,3 +14,4 @@ jobs:
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }} # Required
           vercel-project-id: ${{ secrets.VERCEL_PROJECTID}}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
