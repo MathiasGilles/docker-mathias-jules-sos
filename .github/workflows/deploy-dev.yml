@@ -6,7 +6,17 @@ on:
       - dev
 
 jobs:
+  testing:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Testing
+        uses: actions/checkout@v2
+        with:
+          script: |
+            npm ci
+            npm run test
   eslint:
+    needs: testing
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -14,6 +24,7 @@ jobs:
         with:
           files: pages/
   prettier:
+    needs: testing
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -24,17 +35,8 @@ jobs:
         uses: creyD/prettier_action@v4.0
         with:
           prettier_options: --write ./*.{js,md}
-  testing:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Testing
-        uses: actions/checkout@v2
-        with:
-          script: |
-            npm install
-            npm run test
   deploy:
-    needs: [ eslint, prettier, testing ]
+    needs: [ eslint, prettier ]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
