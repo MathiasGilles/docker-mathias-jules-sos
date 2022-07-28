@@ -1,4 +1,4 @@
-name: test, lint and document pull requests
+name: test lint and document pull requests
 
 on:
   pull_request_target:
@@ -12,33 +12,38 @@ jobs:
     if: ${{ github.event.label.name == 'test' || github.event.label.name == 'all-pr'}}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-      - name: Use Node.js 14.x
-        uses: actions/setup-node@v2
+      - name: Testing
+        uses: actions/checkout@v2
         with:
-          node-version: 14.x
-          cache: 'npm'
-          cache-dependency-path: api/package-lock.json
-      - run: |
-        npm ci
-        npm run test
-  lint:
+          script: |
+            npm ci
+            npm run test
+  eslint:
     if: ${{ github.event.label.name == 'lint' || github.event.label.name == 'all-pr' }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Lint
+        uses: actions/checkout@v2
         with:
-          fetch-depth: 0
-      - run: |
-        npm ci
-        npm run lint
+          script: |
+            npm run lint
+  prettier:
+    if: ${{ github.event.label.name == 'lint' || github.event.label.name == 'all-pr' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
+      - name: Prettify code
+        uses: creyD/prettier_action@v4.0
+        with:
+          prettier_options: --write ./*.{js,md}
   docs:
     if: ${{ github.event.label.name == 'docs' || github.event.label.name == 'all-pr'}}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Create documentation
+        uses: actions/checkout@v2
         with:
-          fetch-depth: 0
-      - run: |
-        npm run jsdoc
+          script: npm run jsdoc
