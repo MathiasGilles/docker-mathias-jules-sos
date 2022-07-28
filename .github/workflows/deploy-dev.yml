@@ -6,6 +6,13 @@ on:
       - dev
 
 jobs:
+  eslint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: stefanoeb/eslint-action@1.0.2
+        with:
+          files: pages/
   prettier:
     runs-on: ubuntu-latest
     steps:
@@ -17,8 +24,15 @@ jobs:
         uses: creyD/prettier_action@v4.0
         with:
           prettier_options: --write ./*.{js,md}
+  testing:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Testing
+        with:
+          script: |
+            npm run test
   deploy:
-    needs: prettier
+    needs: [ eslint, prettier, testing ]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
