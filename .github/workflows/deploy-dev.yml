@@ -36,8 +36,16 @@ jobs:
         uses: creyD/prettier_action@v4.0
         with:
           prettier_options: --write ./*.{js,md}
-  deploy:
+  doc:
     needs: [ eslint, prettier ]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create documentation
+        uses: actions/checkout@v2
+        with:
+          script: npm run jsdoc
+  deploy:
+    needs: doc
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
