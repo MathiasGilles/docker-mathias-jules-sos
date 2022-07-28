@@ -1,4 +1,4 @@
-name: test, lint and document pull requests
+name: test lint and document pull requests
 
 on:
   pull_request_target:
