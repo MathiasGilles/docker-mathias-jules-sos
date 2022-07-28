@@ -29,7 +29,10 @@ jobs:
     steps:
       - name: Testing
         uses: actions/checkout@v2
-        run: npm run test
+        with:
+          script: |
+            npm install
+            npm run test
   deploy:
     needs: [ eslint, prettier, testing ]
     runs-on: ubuntu-latest
