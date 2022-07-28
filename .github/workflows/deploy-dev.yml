@@ -6,7 +6,26 @@ on:
       - dev
 
 jobs:
+  testing:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Testing
+        uses: actions/checkout@v2
+        with:
+          script: |
+            npm ci
+            npm run test
+  eslint:
+    needs: testing
+    runs-on: ubuntu-latest
+    steps:
+      - name: Lint
+        uses: actions/checkout@v2
+        with:
+          script: |
+            npm run lint
   prettier:
+    needs: testing
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -18,7 +37,7 @@ jobs:
         with:
           prettier_options: --write ./*.{js,md}
   deploy:
-    needs: prettier
+    needs: [ eslint, prettier ]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
