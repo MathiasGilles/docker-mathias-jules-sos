@@ -1,5 +1,6 @@
 const handleForm = require('./handleForm.js')
 
+/** this test validate the handler on password */
 describe("HandlePassword", () => {
     describe('Does not work', () => {
         it('Should return false if password is invalid', () => {

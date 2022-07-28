@@ -1,6 +1,6 @@
 const handleForm = require('./handleForm.js')
 
-
+/** this test validate the handler on email */
 describe("HandleEmail", () => {
     describe('does not work', () => {
         it('Should return false if email is invalid', () => {

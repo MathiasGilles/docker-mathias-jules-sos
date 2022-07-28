@@ -3,7 +3,7 @@ import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import {useState} from "react";
 
-
+/** This is the homepage */
 export default function Home() {
 
     const handleForm = require('../logic/handleForm.js')
@@ -19,6 +19,10 @@ export default function Home() {
     const [validatedInputs, setValidatedInputs] = useState(true)
     const [validatedFormContent, setValidatedFormContent] = useState("")
 
+    /** 
+     * @func submitForm  
+     * @param {submitForm} e - the form that creates an account 
+     * */
     function submitForm(e) {
         e.preventDefault()
         if (form.prenom === null || form.nom === null || form.email === null || form.password === null) {
